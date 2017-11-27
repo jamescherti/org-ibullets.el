@@ -28,8 +28,6 @@
 
 ;;; Code:
 
-(eval-when-compile (require 'cl))
-
 (defgroup org-bullets nil
   "Display bullets as UTF-8 characters."
   :group 'org-appearance)
