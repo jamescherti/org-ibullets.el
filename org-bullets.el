@@ -2,7 +2,8 @@
 
 ;; Version: 0.2.4
 ;; Author: sabof
-;; URL: https://github.com/sabof/org-bullets
+;; Maintainer: Jonas Bernoulli <jonas@bernoul.li>
+;; Homepage: https://github.com/emacsorphanage/org-bullets
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -23,8 +24,10 @@
 
 ;;; Commentary:
 
-;; The project is hosted at https://github.com/sabof/org-bullets
-;; The latest version, and all the relevant information can be found there.
+;; Show org-mode bullets as UTF-8 characters.
+
+;; Because the author is inactive, this package is currenlty being
+;; maintained at https://github.com/emacsorphanage/org-bullets.
 
 ;;; Code:
 
