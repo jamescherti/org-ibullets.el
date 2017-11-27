@@ -59,17 +59,20 @@ It can contain any number of symbols, which will be repeated."
   :type 'symbol)
 
 (defvar org-bullets-bullet-map
-  '(keymap
-    (mouse-1 . org-cycle)
-    (mouse-2
-     . (lambda (e)
-         (interactive "e")
-         (mouse-set-point e)
-         (org-cycle))))
+  (let ((map (make-sparse-keymap)))
+    (define-key map [mouse-1] 'org-cycle)
+    (define-key map [mouse-2] 'org-bullets-set-point-and-cycle)
+    map)
   "Mouse events for bullets.
 Should this be undesirable, one can remove them with
 
 \(setcdr org-bullets-bullet-map nil\)")
+
+(defun org-bullets-set-point-and-cycle (event)
+  "Set `point' and where the user clicked and call `org-cycle'."
+  (interactive "e")
+  (mouse-set-point e)
+  (org-cycle))
 
 (defun org-bullets-level-char (level)
   (string-to-char
