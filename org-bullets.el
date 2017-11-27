@@ -123,5 +123,7 @@ Should this be undesirable, one can remove them with
       )))
 
 (provide 'org-bullets)
-
+;; Local Variables:
+;; indent-tabs-mode: nil
+;; End:
 ;;; org-bullets.el ends here
