@@ -116,14 +116,24 @@ Should this be undesirable, one can remove them with
     (if org-bullets-mode
         (progn
           (font-lock-add-keywords nil keyword)
-          (font-lock-fontify-buffer))
+          (org-bullets--fontify-buffer))
       (save-excursion
         (goto-char (point-min))
         (font-lock-remove-keywords nil keyword)
         (while (re-search-forward "^\\*+ " nil t)
           (decompose-region (match-beginning 0) (match-end 0)))
-        (font-lock-fontify-buffer))
-      )))
+        (org-bullets--fontify-buffer)))))
+
+(defun org-bullets--fontify-buffer ()
+  (when font-lock-mode
+    (if (and (fboundp 'font-lock-flush)
+             (fboundp 'font-lock-ensure))
+        (save-restriction
+          (widen)
+          (font-lock-flush)
+          (font-lock-ensure))
+      (with-no-warnings
+        (font-lock-fontify-buffer)))))
 
 (provide 'org-bullets)
 ;; Local Variables:
