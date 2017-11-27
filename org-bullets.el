@@ -31,7 +31,7 @@
 (eval-when-compile (require 'cl))
 
 (defgroup org-bullets nil
-  "Display bullets as UTF-8 characters"
+  "Display bullets as UTF-8 characters."
   :group 'org-appearance)
 
 ;; A nice collection of unicode bullets:
@@ -46,15 +46,15 @@
     ;;; Small
     ;; ► • ★ ▸
     )
-  "This variable contains the list of bullets.
+  "List of bullets used in Org headings.
 It can contain any number of symbols, which will be repeated."
   :group 'org-bullets
   :type '(repeat (string :tag "Bullet character")))
 
 (defcustom org-bullets-face-name nil
-  "This variable allows the org-mode bullets face to be
- overridden. If set to a name of a face, that face will be
- used. Otherwise the face of the heading level will be used."
+  "Face used for bullets in Org mode headings.
+If set to the name of a face, that face is used.
+Otherwise the face of the heading level is used."
   :group 'org-bullets
   :type 'symbol)
 
@@ -82,7 +82,7 @@ Should this be undesirable, one can remove them with
 
 ;;;###autoload
 (define-minor-mode org-bullets-mode
-    "UTF8 Bullets for org-mode"
+  "Use UTF8 bullets in Org mode headings."
   nil nil nil
   (let* (( keyword
            `(("^\\*+ "
