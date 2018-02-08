@@ -57,21 +57,7 @@ Otherwise the face of the heading level is used."
   :group 'org-bullets
   :type 'symbol)
 
-(defvar org-bullets-bullet-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map [mouse-1] 'org-cycle)
-    (define-key map [mouse-2] 'org-bullets-set-point-and-cycle)
-    map)
-  "Mouse events for bullets.
-Should this be undesirable, one can remove them with
-
-\(setcdr org-bullets-bullet-map nil\)")
-
-(defun org-bullets-set-point-and-cycle (event)
-  "Set `point' and where the user clicked and call `org-cycle'."
-  (interactive "e")
-  (mouse-set-point e)
-  (org-cycle))
+(defvar org-bullets-bullet-map (make-sparse-keymap))
 
 (defun org-bullets-level-char (level)
   (string-to-char
