@@ -1,6 +1,6 @@
 ;;; org-bullets.el --- Show bullets in org-mode as UTF-8 characters
 
-;; Version: 0.2.4
+;; Version: 0.3.0
 ;; Author: sabof
 ;; Maintainer: D. Williams <d.williams@posteo.net>
 ;; Homepage: https://github.com/integral-dw/org-bullets
