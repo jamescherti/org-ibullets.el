@@ -1,5 +1,7 @@
 #+TITLE: org-bullets mode
 #+STARTUP: showeverything
+[[https://melpa.org/#/org-bullets][file:https://melpa.org/packages/org-bullets-badge.svg]]
+[[https://stable.melpa.org/#/org-bullets][file:https://stable.melpa.org/packages/org-bullets-badge.svg]]
 
 [[screenshot.png]]
 
