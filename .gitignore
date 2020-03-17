@@ -1,0 +1,4 @@
+*.elc
+*~
+.#*
+.dir-locals.el
