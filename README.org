@@ -23,7 +23,7 @@
 
   #+BEGIN_SRC elisp
   (require 'org-bullets)
-  (add-hook 'org-mode-hook 'org-bullets-mode)
+  (add-hook 'org-mode-hook #'org-bullets-mode)
   #+END_SRC
 
 * FAQ / Troubleshooting
