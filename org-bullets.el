@@ -35,6 +35,8 @@
 
 ;;; Code:
 
+(require 'org)
+
 (defgroup org-bullets nil
   "Display bullets as UTF-8 characters."
   :group 'org-appearance)
@@ -93,9 +95,7 @@ Otherwise the face of the heading level is used."
                                org-bullets-face-name))
           (put-text-property (match-beginning 0)
                              (- (match-end 0) 2)
-                             'face (list :foreground
-                                         (face-attribute
-                                          'default :background)))
+                             'face 'org-hide)
           (put-text-property (match-beginning 0)
                              (match-end 0)
                              'keymap
