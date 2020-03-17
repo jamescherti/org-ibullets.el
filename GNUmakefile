@@ -21,7 +21,7 @@ org-bullets: org-bullets.elc
 	$(ELC) -f batch-byte-compile $<
 
 test-run: org-bullets
-	$(EMACS) -Q -L -l org-bullets.el $(EFLAGS) README.org
+	$(EMACS) -Q -l org-bullets.el $(EFLAGS) README.org
 
 clean:
 	-rm *.elc
