@@ -21,7 +21,7 @@
   Copy the file somewhere in your `load-path`, then add something like
   this to your init file.
 
-  #+BEGIN_SRC elisp
+  #+BEGIN_SRC emacs-lisp
   (require 'org-bullets)
   (add-hook 'org-mode-hook #'org-bullets-mode)
   #+END_SRC
@@ -39,3 +39,5 @@
    further information regarding what I believe is the cause of the
    problem.  If this should not fix the problem, please consider
    opening an issue or sending me a mail!
+
+#  LocalWords:  init MELPA UTF
