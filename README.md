@@ -1,4 +1,4 @@
-# org-ibullets - Show org-mode bullets as UTF-8 characters.
+# org-ibullets (Show org-mode bullets as UTF-8 characters)
 ![Build Status](https://github.com/jamescherti/org-ibullets.el/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/github/license/jamescherti/org-ibullets.el)
 ![](https://raw.githubusercontent.com/jamescherti/org-ibullets.el/main/.images/made-for-gnu-emacs.svg)
@@ -57,8 +57,8 @@ This variable also holds further information regarding what I believe is the cau
 
 ## Alternatives
 
-- [org-superstar](https://github.com/integral-dw/org-superstar-mode)
-- [org-bullets fork](https://github.com/integral-dw/org-bullets) by D. Williams. The org-ibullets is based on this version.
+- [org-superstar](https://github.com/integral-dw/org-superstar-mode): A more complex alternative to org-ibullets that offers additional features beyond UTF-8 bullet support.
+- [org-bullets fork](https://github.com/integral-dw/org-bullets) by D. Williams. The org-ibullets package is based on this Williams' fork.
 - [Original org-bullets](https://github.com/sabof/org-bullets) by Sabof, the original version (unmaintained).
 
 ## Links
