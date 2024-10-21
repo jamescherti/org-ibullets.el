@@ -43,7 +43,7 @@ To install `org-ibullets`, clone the repository or download the `.el` file and a
 
 ### What is the difference with org-bullets?
 
-The `org-ibullets` package is based on the [org-bullets fork](https://github.com/integral-dw/org-bullets), which in turn is derived from the unmaintained [org-bullets](https://github.com/sabof/org-bullets) created by Sabof.
+The `org-ibullets` package is based on the [org-bullets fork](https://github.com/integral-dw/org-bullets), which in turn is derived from the unmaintained [org-bullets](https://github.com/sabof/org-bullets).
 
 Here are the improvements `org-ibullets`:
 - **Optimizations (faster)**: `org-ibullets` has been optimized to eliminate redundant computations, such as repeated calls to functions like `(match-end 0)`. This reduction in unnecessary processing enhances performance, particularly in larger documents.
@@ -55,7 +55,7 @@ This revision improves clarity and flow while maintaining the original meaning.
 ### This mode causes significant slowdown
 
 I recommend adding the following to your Emacs init:
-```
+```emacs-lisp
 (setq inhibit-compacting-font-caches t)
 ```
 
@@ -63,7 +63,7 @@ This variable also holds further information regarding what I believe is the cau
 
 ## Alternatives
 
-- [org-superstar](https://github.com/integral-dw/org-superstar-mode): A more complex alternative to org-ibullets that offers additional features beyond UTF-8 bullet support.
+- [org-superstar](https://github.com/integral-dw/org-superstar-mode): A more complex alternative to `org-ibullets` that offers additional features beyond UTF-8 bullet support.
 
 ## Links
 
