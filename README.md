@@ -43,8 +43,14 @@ To install `org-ibullets`, clone the repository or download the `.el` file and a
 
 ### What is the difference with org-bullets?
 
-- **Optimizations (faster)**: `org-ibullets` is optimized to avoid redundant computations, such as repeated calls to functions like `(match-end 0)`. By minimizing unnecessary processing, it provides better performance, especially in larger documents.
-- **No syntax warnings**: Unlike `org-bullets`, which may trigger warnings related to syntax or font-lock handling in certain Emacs configurations, `org-ibullets` eliminates such issues.
+The `org-ibullets` package is based on the [org-bullets fork](https://github.com/integral-dw/org-bullets), which in turn is derived from the unmaintained [org-bullets](https://github.com/sabof/org-bullets) created by Sabof.
+
+Here are the improvements `org-ibullets`:
+- **Optimizations (faster)**: `org-ibullets` has been optimized to eliminate redundant computations, such as repeated calls to functions like `(match-end 0)`. This reduction in unnecessary processing enhances performance, particularly in larger documents.
+- **No syntax warnings**: Unlike `org-bullets`, which may generate syntax or font-lock warnings in certain Emacs configurations, `org-ibullets` resolves these issues, providing a smoother user experience.
+- **Various enhancements**: Included `-*- lexical-binding: t; -*-`, improved readability and reduced redundancy, fixed warnings, added Melpazoid tests, implemented additional tests, and resolved fontification issues.
+
+This revision improves clarity and flow while maintaining the original meaning.
 
 ### This mode causes significant slowdown
 
@@ -58,8 +64,6 @@ This variable also holds further information regarding what I believe is the cau
 ## Alternatives
 
 - [org-superstar](https://github.com/integral-dw/org-superstar-mode): A more complex alternative to org-ibullets that offers additional features beyond UTF-8 bullet support.
-- [org-bullets fork](https://github.com/integral-dw/org-bullets) by D. Williams. The org-ibullets package is based on this Williams' fork.
-- [Original org-bullets](https://github.com/sabof/org-bullets) by Sabof, the original version (unmaintained).
 
 ## Links
 
