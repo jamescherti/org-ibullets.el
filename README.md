@@ -65,7 +65,7 @@ This variable also holds further information regarding what I believe is the cau
 
 ## Alternatives
 
-- [org-superstar](https://github.com/integral-dw/org-superstar-mode): A more complex alternative to `org-ibullets` that offers additional features beyond UTF-8 bullet support.
+- [org-superstar](https://github.com/integral-dw/org-superstar-mode): A more complex alternative to `org-ibullets` that offers additional features beyond showing bullets as UTF-8 characters. **In contrast, org-ibullets is lightweight and focused on a single task.**
 
 ## Links
 
