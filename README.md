@@ -1,9 +1,9 @@
-# org-ibullets (Show org-mode bullets as UTF-8 characters)
+# org-ibullets (Show org-mode headings bullets as UTF-8 characters)
 ![Build Status](https://github.com/jamescherti/org-ibullets.el/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/github/license/jamescherti/org-ibullets.el)
 ![](https://raw.githubusercontent.com/jamescherti/org-ibullets.el/main/.images/made-for-gnu-emacs.svg)
 
-A minor mode for Emacs that enhances Org mode by displaying UTF-8 bullets in headings.
+A minor mode for Emacs that enhances Org mode by displaying headings bullets as UTF-8 characters.
 
 ![screenshot](https://github.com/jamescherti/org-ibullets.el/raw/main/screenshot.png)
 
