@@ -5,7 +5,7 @@
 
 A minor mode for Emacs that enhances Org mode by displaying headings bullets as UTF-8 characters.
 
-![screenshot](https://github.com/jamescherti/org-ibullets.el/raw/main/screenshot.png)
+![screenshot](https://github.com/jamescherti/org-ibullets.el/raw/main/.images/screenshot.png)
 
 ## Features
 
