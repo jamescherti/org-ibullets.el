@@ -25,10 +25,12 @@ To install the `org-ibullets` using `straight.el`:
 ```emacs-lisp
 (use-package org-ibullets
   :ensure t
+  :commands org-ibullets-mode
   :straight (org-ibullets
              :type git
              :host github
-             :repo "jamescherti/org-ibullets.el"))
+             :repo "jamescherti/org-ibullets.el")
+  :hook (org-mode . org-ibullets-mode))
 ```
 
 ### Manual installation
