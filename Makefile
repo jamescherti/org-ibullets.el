@@ -32,7 +32,3 @@ compile: cask
           --eval "(setq byte-compile-error-on-warn t)" \
 	  -f batch-byte-compile $$(cask files); \
 	  (ret=$$? ; cask clean-elc && exit $$ret)
-
-.PHONY: test
-test: compile
-	cask emacs --batch -L . -L tests -l tests/test-org-ibullets.el -f test-org-ibullets
