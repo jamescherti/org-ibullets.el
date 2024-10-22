@@ -54,7 +54,7 @@ Here are the improvements `org-ibullets`:
 
 This revision improves clarity and flow while maintaining the original meaning.
 
-### This mode causes significant slowdown
+### How can I further improve its speed?
 
 I recommend adding the following to your Emacs init:
 ```emacs-lisp
