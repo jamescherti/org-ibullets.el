@@ -45,7 +45,7 @@ To install `org-ibullets`, clone the repository or download the `.el` file and a
 
 ### What is the difference with org-bullets?
 
-The `org-ibullets` package is based on the [org-bullets fork](https://github.com/integral-dw/org-bullets), which in turn is derived from the unmaintained [org-bullets](https://github.com/sabof/org-bullets).
+The `org-ibullets` package is based on the [MELPA org-bullets fork](https://github.com/integral-dw/org-bullets), which in turn is derived from the unmaintained [org-bullets](https://github.com/sabof/org-bullets).
 
 Here are the improvements `org-ibullets`:
 - **Optimizations (faster)**: `org-ibullets` has been optimized to eliminate redundant computations, such as repeated calls to functions like `(match-end 0)`. This reduction in unnecessary processing enhances performance, particularly in larger documents.
