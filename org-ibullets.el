@@ -45,14 +45,10 @@
   :link '(url-link "https://github.com/jamescherti/org-ibullets.el"))
 
 ;; A nice collection of unicode bullets:
-;; - Large: ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶
-;; - Small: ► • ★ ▸
+;; - Large: ♥ ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶
+;; - Small: ✸ • ★ ▸
 (defcustom org-ibullets-bullet-list
-  '("●"
-    "◉"
-    "○"
-    "✸"
-    "♦")
+  '("●" "◉" "○" "►" "♦")
   "List of bullets used in Org mode headings.
 These symbols will be cycled through for each heading level."
   :group 'org-ibullets
