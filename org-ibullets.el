@@ -107,9 +107,7 @@ Otherwise, the heading level face will be used."
       ;; This function ensures that fontification actually happens for the
       ;; specified region (or the entire buffer if no region is provided).
       (when (fboundp 'font-lock-ensure)
-        (font-lock-ensure)))
-    (with-no-warnings
-      (font-lock-fontify-buffer))))
+        (font-lock-ensure)))))
 
 ;;;###autoload
 (define-minor-mode org-ibullets-mode
