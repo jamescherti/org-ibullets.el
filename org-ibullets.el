@@ -42,7 +42,9 @@
   "Display bullets as UTF-8 characters in Org mode headings."
   :group 'org-appearance
   :prefix "org-ibullets-"
-  :link '(url-link "https://github.com/jamescherti/org-ibullets.el"))
+  :link '(url-link
+          :tag "Github"
+          "https://github.com/jamescherti/org-ibullets.el"))
 
 ;; A nice collection of unicode bullets:
 ;; - Large: ♥ ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶
