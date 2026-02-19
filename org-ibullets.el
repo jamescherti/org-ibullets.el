@@ -95,19 +95,23 @@ Otherwise, the heading level face will be used."
 
 (defun org-ibullets--fontify-buffer ()
   "Fontify the current buffer."
-  (when font-lock-mode
+  ;; Fontify the buffer
+  (when (and (bound-and-true-p font-lock-mode)
+             ;; For maximum safety during a session load, check
+             ;; `font-lock-set-defaults'. This variable guarantees that the
+             ;; font-lock machinery has actually finished configuring its
+             ;; keywords and syntax tables for the current buffer.
+             (bound-and-true-p font-lock-set-defaults))
     (save-restriction
       (widen)
-      ;; This function marks the buffer (or a specific region) for
-      ;; refontification, telling Emacs that the font lock information is
-      ;; no longer valid and needs to be refreshed
-      (when (fboundp 'font-lock-flush)
-        (font-lock-flush))
+      (cond
+       ((and (fboundp 'font-lock-flush)
+             (fboundp 'font-lock-ensure))
+        (font-lock-flush)
+        (font-lock-ensure))
 
-      ;; This function ensures that fontification actually happens for the
-      ;; specified region (or the entire buffer if no region is provided).
-      (when (fboundp 'font-lock-ensure)
-        (font-lock-ensure)))))
+       ((fboundp 'jit-lock-fontify-now)
+        (jit-lock-fontify-now))))))
 
 ;;;###autoload
 (define-minor-mode org-ibullets-mode
