@@ -110,7 +110,8 @@ Otherwise, the heading level face will be used."
        ((and (fboundp 'font-lock-flush)
              (fboundp 'font-lock-ensure))
         (font-lock-flush)
-        (font-lock-ensure))
+        (ignore-errors
+          (font-lock-ensure)))
 
        ((fboundp 'jit-lock-fontify-now)
         (jit-lock-fontify-now))))))
