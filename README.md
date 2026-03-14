@@ -24,7 +24,6 @@ To install `org-ibullets` with `straight.el`:
 2. Add the following code to the Emacs init file:
 ```emacs-lisp
 (use-package org-ibullets
-  :ensure t
   :commands org-ibullets-mode
   :straight (org-ibullets
              :type git
