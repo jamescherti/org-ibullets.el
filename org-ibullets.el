@@ -104,17 +104,11 @@ Otherwise, the heading level face will be used."
              ;; font-lock machinery has actually finished configuring its
              ;; keywords and syntax tables for the current buffer.
              (bound-and-true-p font-lock-set-defaults))
-    (save-restriction
-      (widen)
-      (cond
-       ((and (fboundp 'font-lock-flush)
-             (fboundp 'font-lock-ensure))
-        (font-lock-flush)
-        (ignore-errors
-          (font-lock-ensure)))
-
-       ((fboundp 'jit-lock-fontify-now)
-        (jit-lock-fontify-now))))))
+    (when (bound-and-true-p font-lock-mode)
+      (if (fboundp 'font-lock-flush)
+          (font-lock-flush)
+        (with-no-warnings
+          (font-lock-fontify-buffer))))))
 
 ;;;###autoload
 (define-minor-mode org-ibullets-mode
