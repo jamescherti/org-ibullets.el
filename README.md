@@ -62,10 +62,6 @@ I recommend adding the following to your Emacs init:
 
 This variable also holds further information regarding what I believe is the cause of the problem.
 
-## Alternatives
-
-- [org-superstar](https://github.com/integral-dw/org-superstar-mode): A more complex alternative to `org-ibullets` that offers additional features beyond showing bullets as UTF-8 characters. **In contrast, org-ibullets is lightweight and focused on a single task.**
-
 ## Links
 
 - [org-ibullets.el @GitHub](https://github.com/jamescherti/org-ibullets.el)
