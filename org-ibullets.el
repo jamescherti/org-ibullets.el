@@ -6,7 +6,7 @@
 ;; Original Author: Evgkeni Sampelnikof (Sabof)
 ;; Package-Requires: ((emacs "25.1"))
 ;; Keywords: maint
-;; Version: 1.0.0
+;; Version: 1.0.1
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;; This file is NOT part of GNU Emacs.
