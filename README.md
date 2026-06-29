@@ -1,5 +1,5 @@
 # org-ibullets (Show org-mode headings bullets as UTF-8 characters)
-![Build Status](https://github.com/jamescherti/org-ibullets.el/actions/workflows/ci.yml/badge.svg)
+![Build Status](https://github.com/jamescherti/org-ibullets.el/actions/workflows/melpazoid.yml/badge.svg)
 ![License](https://img.shields.io/github/license/jamescherti/org-ibullets.el)
 ![](https://jamescherti.com/misc/made-for-gnu-emacs.svg)
 
