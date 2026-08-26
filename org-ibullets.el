@@ -5,7 +5,7 @@
 ;; Original Author: D. Williams <d.williams@posteo.net>
 ;; Original Author: Evgkeni Sampelnikof (Sabof)
 ;; Package-Requires: ((emacs "25.1"))
-;; Keywords: maint
+;; Keywords: convenience, outlines, faces
 ;; Version: 1.0.1
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
