@@ -47,11 +47,9 @@ To install `org-ibullets`, clone the repository or download the `.el` file and a
 The `org-ibullets` package is based on the [MELPA org-bullets fork](https://github.com/integral-dw/org-bullets), which in turn is derived from the unmaintained [org-bullets](https://github.com/sabof/org-bullets).
 
 Here are the improvements `org-ibullets`:
-- **Optimizations (faster)**: `org-ibullets` has been optimized to eliminate redundant computations, such as repeated calls to functions like `(match-end 0)`. This reduction in unnecessary processing enhances performance, particularly in larger documents.
-- **No syntax warnings**: Unlike `org-bullets`, which may generate syntax or font-lock warnings in certain Emacs configurations, `org-ibullets` resolves these issues, providing a smoother user experience.
-- **Various enhancements**: Included `-*- lexical-binding: t; -*-`, improved readability and reduced redundancy, fixed warnings, added Melpazoid tests, implemented additional tests, and resolved fontification issues.
-
-This revision improves clarity and flow while maintaining the original meaning.
+- **Optimizations**: `org-ibullets` has been optimized to eliminate redundant computations, such as repeated calls to functions.
+- **No syntax warnings**: Unlike `org-bullets`, which may generate syntax or font-lock warnings in certain Emacs configurations, `org-ibullets` resolves these issues.
+- **Various enhancements**: Improved readability and reduced redundancy, fixed warnings, included `-*- lexical-binding: t; -*-`, added Melpazoid tests, implemented additional tests, and resolved fontification issues.
 
 ### How can I further improve its speed?
 
