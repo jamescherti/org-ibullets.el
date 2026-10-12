@@ -3,7 +3,7 @@
 ![License](https://img.shields.io/github/license/jamescherti/org-ibullets.el)
 ![](https://jamescherti.com/misc/made-for-gnu-emacs.svg)
 
-The **[org-ibullet](https://github.com/jamescherti/org-ibullets.el)** is a minor mode for Emacs that enhances Org mode by displaying headings bullets as UTF-8 characters.
+The **[org-ibullet](https://github.com/jamescherti/org-ibullets.el)** Emacs package is a minor mode for Emacs that enhances Org mode by displaying headings bullets as UTF-8 characters.
 
 ![screenshot](https://github.com/jamescherti/org-ibullets.el/raw/main/.images/screenshot.png)
 
