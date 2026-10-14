@@ -130,10 +130,7 @@ Otherwise, the heading level face will be used."
              (bound-and-true-p font-lock-set-defaults))
     (save-restriction
       (widen)
-      (if (fboundp 'font-lock-flush)
-          (font-lock-flush)
-        (with-no-warnings
-          (font-lock-fontify-buffer))))))
+      (font-lock-flush))))
 
 ;;;###autoload
 (define-minor-mode org-ibullets-mode
@@ -147,10 +144,13 @@ Otherwise, the heading level face will be used."
         (make-local-variable 'font-lock-extra-managed-props)
         (dolist (prop '(composition keymap))
           (unless (memq prop font-lock-extra-managed-props)
-            (push prop org-ibullets--managed-props-added)
+            (unless (memq prop org-ibullets--managed-props-added)
+              (push prop org-ibullets--managed-props-added))
             (push prop font-lock-extra-managed-props)))
         (font-lock-add-keywords nil org-ibullets--keywords))
     (font-lock-remove-keywords nil org-ibullets--keywords)
+    (setq org-ibullets--bullet-list-cache nil
+          org-ibullets--bullet-chars nil)
     (when org-ibullets--managed-props-added
       (dolist (prop org-ibullets--managed-props-added)
         (setq font-lock-extra-managed-props
