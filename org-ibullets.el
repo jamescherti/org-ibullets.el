@@ -38,6 +38,8 @@
 
 (require 'org)
 
+(defvar org-inlinetask-min-level)
+
 (defgroup org-ibullets nil
   "Display bullets as UTF-8 characters in Org mode headings."
   :group 'org-appearance
@@ -77,20 +79,20 @@ Otherwise, the heading level face will be used."
   (let* ((heading-start (match-beginning 0))
          (heading-end (match-end 0))
          (level (- heading-end heading-start 1))
-         (is-inline-task (and (boundp 'org-inlinetask-min-level)
+         (is-inline-task (and (> level 2)
+                              (bound-and-true-p org-inlinetask-min-level)
                               (>= level org-inlinetask-min-level)))
          (bullet-start (1- heading-end))
          (bullet-end (- heading-end 2))
+         (hide-end (if is-inline-task (- heading-end 3) bullet-end))
          (bullet-char (org-ibullets-level-char level)))
-    (compose-region bullet-end bullet-start
-                    bullet-char)
+    (compose-region bullet-end bullet-start bullet-char)
     (when is-inline-task
-      (compose-region (- heading-end 3) bullet-end bullet-char))
-    (when (facep org-ibullets-face-name)
-      (put-text-property (- heading-end (if is-inline-task 3 2))
-                         bullet-start 'face
-                         org-ibullets-face-name))
-    (put-text-property heading-start bullet-end 'face 'org-hide)
+      (compose-region hide-end bullet-end bullet-char))
+    (when (and org-ibullets-face-name (facep org-ibullets-face-name))
+      (put-text-property hide-end bullet-start 'face org-ibullets-face-name))
+    (when (< heading-start hide-end)
+      (put-text-property heading-start hide-end 'face 'org-hide))
     (put-text-property heading-start heading-end 'keymap
                        org-ibullets-bullet-map)
     nil))
@@ -108,11 +110,10 @@ Otherwise, the heading level face will be used."
              ;; font-lock machinery has actually finished configuring its
              ;; keywords and syntax tables for the current buffer.
              (bound-and-true-p font-lock-set-defaults))
-    (when (bound-and-true-p font-lock-mode)
-      (if (fboundp 'font-lock-flush)
-          (font-lock-flush)
-        (with-no-warnings
-          (font-lock-fontify-buffer))))))
+    (if (fboundp 'font-lock-flush)
+        (font-lock-flush)
+      (with-no-warnings
+        (font-lock-fontify-buffer)))))
 
 ;;;###autoload
 (define-minor-mode org-ibullets-mode
