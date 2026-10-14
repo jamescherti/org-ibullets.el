@@ -72,28 +72,32 @@ Otherwise, the heading level face will be used."
          (index (mod (/ (1- level) step) (length org-ibullets-bullet-list))))
     (string-to-char (nth index org-ibullets-bullet-list))))
 
+(defun org-ibullets--fontify-heading ()
+  "Fontify the bullet of the current Org mode heading match."
+  (let* ((heading-start (match-beginning 0))
+         (heading-end (match-end 0))
+         (level (- heading-end heading-start 1))
+         (is-inline-task (and (boundp 'org-inlinetask-min-level)
+                              (>= level org-inlinetask-min-level)))
+         (bullet-start (1- heading-end))
+         (bullet-end (- heading-end 2))
+         (bullet-char (org-ibullets-level-char level)))
+    (compose-region bullet-end bullet-start
+                    bullet-char)
+    (when is-inline-task
+      (compose-region (- heading-end 3) bullet-end bullet-char))
+    (when (facep org-ibullets-face-name)
+      (put-text-property (- heading-end (if is-inline-task 3 2))
+                         bullet-start 'face
+                         org-ibullets-face-name))
+    (put-text-property heading-start bullet-end 'face 'org-hide)
+    (put-text-property heading-start heading-end 'keymap
+                       org-ibullets-bullet-map)
+    nil))
+
 (defvar org-ibullets--keywords
-  `(("^\\*+ "
-     (0 (let* ((heading-start (match-beginning 0))
-               (heading-end (match-end 0))
-               (level (- heading-end heading-start 1))
-               (is-inline-task (and (boundp 'org-inlinetask-min-level)
-                                    (>= level org-inlinetask-min-level)))
-               (bullet-start (1- heading-end))
-               (bullet-end (- heading-end 2))
-               (bullet-char (org-ibullets-level-char level)))
-          (compose-region bullet-end bullet-start
-                          bullet-char)
-          (when is-inline-task
-            (compose-region (- heading-end 3) bullet-end bullet-char))
-          (when (facep org-ibullets-face-name)
-            (put-text-property (- heading-end (if is-inline-task 3 2))
-                               bullet-start 'face
-                               org-ibullets-face-name))
-          (put-text-property heading-start bullet-end 'face 'org-hide)
-          (put-text-property heading-start heading-end 'keymap
-                             org-ibullets-bullet-map)
-          nil)))))
+  '(("^\\*+ "
+     (0 (org-ibullets--fontify-heading)))))
 
 (defun org-ibullets--fontify-buffer ()
   "Fontify the current buffer."
