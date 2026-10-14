@@ -68,11 +68,21 @@ Otherwise, the heading level face will be used."
 (defvar org-ibullets-bullet-map (make-sparse-keymap)
   "Keymap for Org mode bullets.")
 
-(defun org-ibullets-level-char (level)
+(defvar org-ibullets--bullet-chars nil
+  "Cached vector of bullet characters derived from `org-ibullets-bullet-list'.")
+
+(defvar org-ibullets--bullet-list-cache nil
+  "Last `org-ibullets-bullet-list' to build `org-ibullets--bullet-chars'.")
+
+(defsubst org-ibullets-level-char (level)
   "Return the appropriate bullet for the given heading LEVEL."
-  (let* ((step (if org-odd-levels-only 2 1))
-         (index (mod (/ (1- level) step) (length org-ibullets-bullet-list))))
-    (string-to-char (nth index org-ibullets-bullet-list))))
+  (unless (eq org-ibullets-bullet-list org-ibullets--bullet-list-cache)
+    (setq org-ibullets--bullet-list-cache org-ibullets-bullet-list
+          org-ibullets--bullet-chars
+          (vconcat (mapcar #'string-to-char org-ibullets-bullet-list))))
+  (aref org-ibullets--bullet-chars
+        (mod (if org-odd-levels-only (ash (1- level) -1) (1- level))
+             (length org-ibullets--bullet-chars))))
 
 (defun org-ibullets--fontify-heading ()
   "Fontify the bullet of the current Org mode heading match."
@@ -121,12 +131,16 @@ Otherwise, the heading level face will be used."
   :global nil
   :group 'org-ibullets
   (if org-ibullets-mode
-      (font-lock-add-keywords nil org-ibullets--keywords)
-    (save-excursion
-      (goto-char (point-min))
-      (font-lock-remove-keywords nil org-ibullets--keywords)
-      (while (re-search-forward "^\\*+ " nil t)
-        (decompose-region (match-beginning 0) (match-end 0)))))
+      (progn
+        (setq org-ibullets--bullet-list-cache nil)
+        (font-lock-add-keywords nil org-ibullets--keywords))
+    (font-lock-remove-keywords nil org-ibullets--keywords)
+    (with-silent-modifications
+      (save-excursion
+        (goto-char (point-min))
+        (while (re-search-forward "^\\*+ " nil t)
+          (remove-text-properties (match-beginning 0) (match-end 0)
+                                  '(composition nil keymap nil))))))
   (org-ibullets--fontify-buffer))
 
 (provide 'org-ibullets)
