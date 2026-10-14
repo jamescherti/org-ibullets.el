@@ -60,15 +60,16 @@ To install **org-ibullets**, clone the repository or download the `.el` file and
 
 ### What is the difference with org-bullets?
 
-The `org-ibullets` package is based on the [MELPA org-bullets fork](https://github.com/integral-dw/org-bullets), which in turn is derived from the unmaintained [org-bullets](https://github.com/sabof/org-bullets).
+The **org-ibullets** package is based on the [MELPA org-bullets fork](https://github.com/integral-dw/org-bullets), which in turn is derived from the unmaintained [org-bullets](https://github.com/sabof/org-bullets).
 
-Here are the improvements in `org-ibullets`:
+Here are the improvements in **org-ibullets**:
 
-* Performance optimizations: Bullet characters are cached in a vector for faster lookups, and heading level calculations use fast bitwise shifts. The character lookup function is also inlined (`defsubst`) to reduce function call overhead during fontification.
-* Cleaner mode deactivation: When disabling the minor mode, it properly removes `composition` and `keymap` text properties using `with-silent-modifications` instead of relying on `decompose-region`.
-* Refactored font-lock: The font-lock keywords have been cleaned up by extracting anonymous functions into dedicated, readable functions.
-* No syntax warnings: Unlike `org-bullets`, which may generate syntax or font-lock warnings in certain Emacs configurations, `org-ibullets` resolves these issues.
-* Various other enhancements: Improved readability, reduced redundancy, fixed warnings, included `-*- lexical-binding: t; -*-`, added Melpazoid tests, implemented additional tests, and resolved fontification issues.
+- Performance optimizations: Bullet characters are cached in a vector for faster lookups, and heading level calculations (specifically dividing levels when `org-odd-levels-only` is enabled) use fast bitwise division (`ash`) instead of generic integer division. The character lookup function is also inlined (`defsubst`) to reduce function call overhead during fontification. Face evaluation is short-circuited to skip expensive `facep` checks when no custom face is configured.
+- Cleaner mode deactivation: When disabling the minor mode, it properly removes `composition` and `keymap` text properties using `with-silent-modifications` instead of relying on `decompose-region`. It also precisely tracks managed text properties, avoiding redundant memory allocations and safely cleaning up without mutating global defaults.
+- Refactored font-lock: Extracted inline fontification forms from font-lock keywords into a dedicated function, allowing the logic to be byte-compiled and native-compiled.
+- Code modernization: Dead code and legacy Emacs 24 fallbacks were removed, as the package natively targets Emacs 25.1+ (using `font-lock-flush`). Text-property bound calculations were also fixed to prevent inverted indices for inline tasks.
+- No syntax warnings: Unlike `org-bullets`, which may generate syntax or font-lock warnings in certain Emacs configurations, **org-ibullets** resolves these issues.
+- Various other enhancements: Improved readability, reduced redundancy, fixed warnings, included `-*- lexical-binding: t; -*-`, added Melpazoid tests, implemented additional tests, and resolved fontification issues.
 
 ### How can I further improve its speed?
 
