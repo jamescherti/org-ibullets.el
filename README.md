@@ -1,9 +1,9 @@
-# org-ibullets - Display Org mode heading stars as UTF-8 bullets
+# org-ibullets.el - Display Emacs org-mode heading stars as UTF-8 bullets
 ![Build Status](https://github.com/jamescherti/org-ibullets.el/actions/workflows/melpazoid.yml/badge.svg)
 ![License](https://img.shields.io/github/license/jamescherti/org-ibullets.el)
 ![](https://jamescherti.com/misc/made-for-gnu-emacs.svg)
 
-The **[org-ibullet](https://github.com/jamescherti/org-ibullets.el)** Emacs package provides a minor mode that enhances `org-mode` by displaying headings bullets as UTF-8 characters.
+The **[org-ibullets](https://github.com/jamescherti/org-ibullets.el)** Emacs package provides a minor mode that enhances `org-mode` by displaying headings bullets as UTF-8 characters.
 
 ![screenshot](https://github.com/jamescherti/org-ibullets.el/raw/main/.images/screenshot.png)
 
@@ -16,26 +16,39 @@ The **[org-ibullet](https://github.com/jamescherti/org-ibullets.el)** Emacs pack
 
 ## Installation
 
-### Install with straight (preferred)
+### Installing with use-package and :vc (Emacs version >= 30)
 
-To install `org-ibullets` with `straight.el`:
-
-1. It if hasn't already been done, [add the straight.el bootstrap code](https://github.com/radian-software/straight.el?tab=readme-ov-file#getting-started) to your init file.
-2. Add the following code to the Emacs init file:
+To install **org-ibullets** using the built-in `:vc` keyword:
 ```emacs-lisp
 (use-package org-ibullets
+  :vc (:url "https://github.com/jamescherti/org-ibullets.el"
+       :rev :newest))
   :commands org-ibullets-mode
+  :hook (org-mode . org-ibullets-mode))
+```
+
+### Install with straight (Emacs version < 30)
+
+To install **org-ibullets** with `straight.el`:
+
+1. If it hasn't already been done, [add the straight.el bootstrap code](https://github.com/radian-software/straight.el?tab=readme-ov-file#getting-started) to your init file.
+2. Add the following code to the Emacs init file:
+
+```emacs-lisp
+(use-package org-ibullets
   :straight (org-ibullets
              :type git
              :host github
              :repo "jamescherti/org-ibullets.el")
+  :commands org-ibullets-mode
   :hook (org-mode . org-ibullets-mode))
 ```
 
 ### Manual installation
 
-To install `org-ibullets`, clone the repository or download the `.el` file and add it to your Emacs load path, then add to your .emacs:
-```
+To install **org-ibullets**, clone the repository or download the `.el` file and add it to your Emacs load path, then add to your .emacs:
+
+```emacs-lisp
 (require 'org-ibullets)
 (add-hook 'org-mode-hook (lambda () (org-ibullets-mode 1)))
 ```
@@ -54,6 +67,7 @@ Here are the improvements `org-ibullets`:
 ### How can I further improve its speed?
 
 I recommend adding the following to your Emacs init:
+
 ```emacs-lisp
 (setq inhibit-compacting-font-caches t)
 ```
