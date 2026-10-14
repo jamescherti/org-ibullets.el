@@ -152,8 +152,6 @@ Otherwise, the heading level face will be used."
         (font-lock-add-keywords nil org-ibullets--keywords))
     (font-lock-remove-keywords nil org-ibullets--keywords)
     (when org-ibullets--managed-props-added
-      (setq font-lock-extra-managed-props
-            (copy-sequence font-lock-extra-managed-props))
       (dolist (prop org-ibullets--managed-props-added)
         (setq font-lock-extra-managed-props
               (delq prop font-lock-extra-managed-props)))
