@@ -68,10 +68,10 @@ Otherwise, the heading level face will be used."
 (defvar org-ibullets-bullet-map (make-sparse-keymap)
   "Keymap for Org mode bullets.")
 
-(defvar org-ibullets--bullet-chars nil
+(defvar-local org-ibullets--bullet-chars nil
   "Cached vector of bullet characters derived from `org-ibullets-bullet-list'.")
 
-(defvar org-ibullets--bullet-list-cache nil
+(defvar-local org-ibullets--bullet-list-cache nil
   "Last `org-ibullets-bullet-list' to build `org-ibullets--bullet-chars'.")
 
 (defsubst org-ibullets-level-char (level)
