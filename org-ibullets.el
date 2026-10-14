@@ -63,7 +63,7 @@ These symbols will be cycled through for each heading level."
 If set to a face, that face will be used for the bullets.
 Otherwise, the heading level face will be used."
   :group 'org-ibullets
-  :type 'symbol)
+  :type '(choice (const :tag "Default (use heading level face)" nil) face))
 
 (defvar org-ibullets-bullet-map (make-sparse-keymap)
   "Keymap for Org mode bullets.")
@@ -76,13 +76,17 @@ Otherwise, the heading level face will be used."
 
 (defsubst org-ibullets-level-char (level)
   "Return the appropriate bullet for the given heading LEVEL."
-  (unless (eq org-ibullets-bullet-list org-ibullets--bullet-list-cache)
+  (unless (and org-ibullets--bullet-chars
+               (eq org-ibullets-bullet-list org-ibullets--bullet-list-cache))
     (setq org-ibullets--bullet-list-cache org-ibullets-bullet-list
           org-ibullets--bullet-chars
-          (vconcat (mapcar #'string-to-char org-ibullets-bullet-list))))
-  (aref org-ibullets--bullet-chars
-        (mod (if org-odd-levels-only (ash (1- level) -1) (1- level))
-             (length org-ibullets--bullet-chars))))
+          (vconcat (delq 0 (mapcar #'string-to-char
+                                   org-ibullets-bullet-list)))))
+  (let ((len (length org-ibullets--bullet-chars)))
+    (when (> len 0)
+      (aref org-ibullets--bullet-chars
+            (mod (if org-odd-levels-only (ash (1- level) -1) (1- level))
+                 len)))))
 
 (defun org-ibullets--fontify-heading ()
   "Fontify the bullet of the current Org mode heading match."
@@ -92,15 +96,16 @@ Otherwise, the heading level face will be used."
          (is-inline-task (and (> level 2)
                               (bound-and-true-p org-inlinetask-min-level)
                               (>= level org-inlinetask-min-level)))
-         (bullet-start (1- heading-end))
-         (bullet-end (- heading-end 2))
-         (hide-end (if is-inline-task (- heading-end 3) bullet-end))
+         (bullet-start (- heading-end 2))
+         (bullet-end (1- heading-end))
+         (hide-end (if is-inline-task (- heading-end 3) bullet-start))
          (bullet-char (org-ibullets-level-char level)))
-    (compose-region bullet-end bullet-start bullet-char)
-    (when is-inline-task
-      (compose-region hide-end bullet-end bullet-char))
+    (when bullet-char
+      (compose-region bullet-start bullet-end bullet-char)
+      (when is-inline-task
+        (compose-region hide-end bullet-start bullet-char)))
     (when (and org-ibullets-face-name (facep org-ibullets-face-name))
-      (put-text-property hide-end bullet-start 'face org-ibullets-face-name))
+      (put-text-property hide-end bullet-end 'face org-ibullets-face-name))
     (when (< heading-start hide-end)
       (put-text-property heading-start hide-end 'face 'org-hide))
     (put-text-property heading-start heading-end 'keymap
@@ -120,10 +125,12 @@ Otherwise, the heading level face will be used."
              ;; font-lock machinery has actually finished configuring its
              ;; keywords and syntax tables for the current buffer.
              (bound-and-true-p font-lock-set-defaults))
-    (if (fboundp 'font-lock-flush)
-        (font-lock-flush)
-      (with-no-warnings
-        (font-lock-fontify-buffer)))))
+    (save-restriction
+      (widen)
+      (if (fboundp 'font-lock-flush)
+          (font-lock-flush)
+        (with-no-warnings
+          (font-lock-fontify-buffer))))))
 
 ;;;###autoload
 (define-minor-mode org-ibullets-mode
@@ -133,14 +140,22 @@ Otherwise, the heading level face will be used."
   (if org-ibullets-mode
       (progn
         (setq org-ibullets--bullet-list-cache nil)
+        (make-local-variable 'font-lock-extra-managed-props)
+        (dolist (prop '(composition keymap))
+          (add-to-list 'font-lock-extra-managed-props prop))
         (font-lock-add-keywords nil org-ibullets--keywords))
     (font-lock-remove-keywords nil org-ibullets--keywords)
+    (setq font-lock-extra-managed-props
+          (delq 'composition
+                (delq 'keymap font-lock-extra-managed-props)))
     (with-silent-modifications
       (save-excursion
-        (goto-char (point-min))
-        (while (re-search-forward "^\\*+ " nil t)
-          (remove-text-properties (match-beginning 0) (match-end 0)
-                                  '(composition nil keymap nil))))))
+        (save-restriction
+          (widen)
+          (goto-char (point-min))
+          (while (re-search-forward "^\\*+ " nil t)
+            (remove-text-properties (match-beginning 0) (match-end 0)
+                                    '(composition nil keymap nil)))))))
   (org-ibullets--fontify-buffer))
 
 (provide 'org-ibullets)
