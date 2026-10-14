@@ -74,6 +74,9 @@ Otherwise, the heading level face will be used."
 (defvar-local org-ibullets--bullet-list-cache nil
   "Last `org-ibullets-bullet-list' to build `org-ibullets--bullet-chars'.")
 
+(defvar-local org-ibullets--managed-props-added nil
+  "Font-lock properties added to `font-lock-extra-managed-props' by this mode.")
+
 (defsubst org-ibullets-level-char (level)
   "Return the appropriate bullet for the given heading LEVEL."
   (unless (and org-ibullets--bullet-chars
@@ -103,13 +106,13 @@ Otherwise, the heading level face will be used."
     (when bullet-char
       (compose-region bullet-start bullet-end bullet-char)
       (when is-inline-task
-        (compose-region hide-end bullet-start bullet-char)))
-    (when (and org-ibullets-face-name (facep org-ibullets-face-name))
-      (put-text-property hide-end bullet-end 'face org-ibullets-face-name))
-    (when (< heading-start hide-end)
-      (put-text-property heading-start hide-end 'face 'org-hide))
-    (put-text-property heading-start heading-end 'keymap
-                       org-ibullets-bullet-map)
+        (compose-region hide-end bullet-start bullet-char))
+      (when (and org-ibullets-face-name (facep org-ibullets-face-name))
+        (put-text-property hide-end bullet-end 'face org-ibullets-face-name))
+      (when (< heading-start hide-end)
+        (put-text-property heading-start hide-end 'face 'org-hide))
+      (put-text-property heading-start heading-end 'keymap
+                         org-ibullets-bullet-map))
     nil))
 
 (defvar org-ibullets--keywords
@@ -139,15 +142,22 @@ Otherwise, the heading level face will be used."
   :group 'org-ibullets
   (if org-ibullets-mode
       (progn
-        (setq org-ibullets--bullet-list-cache nil)
+        (setq org-ibullets--bullet-list-cache nil
+              org-ibullets--bullet-chars nil)
         (make-local-variable 'font-lock-extra-managed-props)
         (dolist (prop '(composition keymap))
-          (add-to-list 'font-lock-extra-managed-props prop))
+          (unless (memq prop font-lock-extra-managed-props)
+            (push prop org-ibullets--managed-props-added)
+            (push prop font-lock-extra-managed-props)))
         (font-lock-add-keywords nil org-ibullets--keywords))
     (font-lock-remove-keywords nil org-ibullets--keywords)
-    (setq font-lock-extra-managed-props
-          (delq 'composition
-                (delq 'keymap font-lock-extra-managed-props)))
+    (when org-ibullets--managed-props-added
+      (setq font-lock-extra-managed-props
+            (copy-sequence font-lock-extra-managed-props))
+      (dolist (prop org-ibullets--managed-props-added)
+        (setq font-lock-extra-managed-props
+              (delq prop font-lock-extra-managed-props)))
+      (setq org-ibullets--managed-props-added nil))
     (with-silent-modifications
       (save-excursion
         (save-restriction
