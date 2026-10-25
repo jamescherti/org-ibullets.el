@@ -25,7 +25,7 @@ To install **org-ibullets** using the built-in `:vc` keyword:
 ```emacs-lisp
 (use-package org-ibullets
   :vc (:url "https://github.com/jamescherti/org-ibullets.el"
-       :rev :newest))
+       :rev :newest)
   :commands org-ibullets-mode
   :hook (org-mode . org-ibullets-mode))
 ```
