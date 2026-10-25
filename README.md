@@ -3,6 +3,9 @@
 ![License](https://img.shields.io/github/license/jamescherti/org-ibullets.el)
 ![](https://jamescherti.com/misc/made-for-gnu-emacs.svg)
 
+- Author: James Cherti <[https://www.jamescherti.com/](https://www.jamescherti.com/)>
+- License: GPL
+
 The **[org-ibullets](https://github.com/jamescherti/org-ibullets.el)** Emacs package provides a minor mode that enhances `org-mode` by displaying headings bullets as UTF-8 characters.
 
 ![screenshot](https://github.com/jamescherti/org-ibullets.el/raw/main/.images/screenshot.png)
